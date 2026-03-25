@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Libre Baskerville", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-handwriting: "Patrick Hand", cursive;
+}
+
+@layer base {
+  :root {
+    --paper-bg: #fdfaf1;
+    --paper-line: #e5e7eb;
+    --paper-margin: #fecaca;
+    --ink-primary: #1f2937;
+    --ink-secondary: #4b5563;
+    --pencil-blue: #3b82f6;
+    --pencil-red: #ef4444;
+  }
+
+  body {
+    background-color: #f3f4f6;
+    color: var(--ink-primary);
+    font-family: var(--font-sans);
+  }
+}
+
+@layer components {
+  .notebook-page {
+    @apply bg-[var(--paper-bg)] shadow-xl border border-gray-200 relative overflow-hidden;
+    background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+    background-size: 100% 2rem;
+    padding-top: 2rem;
+  }
+
+  .notebook-margin {
+    @apply absolute left-12 top-0 bottom-0 w-[2px] bg-[var(--paper-margin)];
+  }
+
+  .handwritten {
+    font-family: var(--font-handwriting);
+  }
+
+  .pencil-underline {
+    @apply border-b-2 border-dashed border-[var(--pencil-blue)];
+  }
+
+  .btn-notebook {
+    @apply px-4 py-2 border-2 border-[var(--ink-primary)] bg-white hover:bg-gray-50 transition-all active:translate-y-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)];
+  }
+
+  .card-notebook {
+    @apply p-6 border-2 border-[var(--ink-primary)] bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)];
+  }
+}
+
+/* Custom scrollbar for notebook feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink-secondary);
+  border-radius: 4px;
+}
