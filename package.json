@@ -1,0 +1,66 @@
+{
+  "name": "ai-assistant",
+  "version": "1.0.0",
+  "description": "Desktop AI Study Assistant with Electron + React + Ollama",
+  "author": "Your Name",
+  "main": "electron/main.js",
+  "homepage": "./",
+  "scripts": {
+    "dev": "npm --prefix react-app run dev",
+    "electron": "concurrently -k \"npm:dev\" \"npm:electron:app\"",
+    "electron:app": "wait-on http://localhost:5173 && cross-env ELECTRON_START_URL=http://localhost:5173 electron .",
+    "build:react": "npm --prefix react-app run build",
+    "build": "npm run build:react",
+    "dist": "npm run build && electron-builder --win --publish never",
+    "dist:publish": "npm run build && electron-builder --win -p always"
+  },
+  "keywords": [
+    "electron",
+    "react",
+    "study-assistant",
+    "ai",
+    "ollama"
+  ],
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^41.0.3",
+    "electron-builder": "^26.8.1",
+    "wait-on": "^9.0.4"
+  },
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  },
+  "build": {
+    "appId": "com.study-assistant.app",
+    "productName": "AI Study Assistant",
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist-app"
+    },
+    "files": [
+      "electron/**/*",
+      "react-app/dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "AI Study Assistant"
+    }
+  }
+}
